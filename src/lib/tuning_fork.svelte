@@ -12,6 +12,7 @@
 
   const beginPlaying = () => {
     playing = true;
+    const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
     const ctx = new AudioContext();
     sounds = ctx.createOscillator();
     const freq = calculateFreq(baseFreqHz, pitch, mod, octave);
