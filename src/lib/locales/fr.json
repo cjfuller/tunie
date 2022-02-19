@@ -1,0 +1,19 @@
+{
+    "Tuner": "Accordeur",
+    "Metronome": "Métronome",
+    "Tuning fork": "Diapason",
+    "Octave": "Octave",
+    "Pitch": "Hauteur",
+    "Play": "Jouer",
+    "Stop": "Arrêter",
+    "Coming soon": "À venir",
+    "pitches": {
+        "a": "la",
+        "b": "si",
+        "c": "do",
+        "d": "ré",
+        "e": "mi",
+        "f": "fa",
+        "g": "sol"
+    }
+}
