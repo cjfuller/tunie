@@ -7,6 +7,7 @@
     "Play": "Play",
     "Stop": "Stop",
     "Coming soon": "Coming soon",
+    "iOSMessage": "If you are using an iPhone, note that the ringer mute switch will also mute the application audio.",
     "pitches": {
         "a": "a",
         "b": "b",

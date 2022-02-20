@@ -9,6 +9,8 @@
   let pitch = "a";
   let mod = "\u266e";
   let sounds: OscillatorNode | null = null;
+  let uaSearch = globalThis?.navigator?.userAgent?.indexOf("AppleWebKit");
+  let uaIsWebkit = uaSearch != null && uaSearch != -1;
 
   const beginPlaying = () => {
     playing = true;
@@ -73,6 +75,8 @@
   <Button class={playing ? "stop-button" : "play-button"} on:click={ () => playing ? endPlaying() : beginPlaying() }>
     {playing ? $_("Stop") : $_("Play")}
   </Button>
+  <div class="spacer"></div>
+  {uaIsWebkit ? $_("iOSMessage") : ""}
 </Container>
 
 <style>
