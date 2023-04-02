@@ -11,5 +11,13 @@
 
 <Nav/>
 <Container>
-  {$_("Coming soon")}
+  <div class="text">
+    {$_("Coming soon")}
+  </div>
 </Container>
+
+<style>
+  .text {
+    color: #9cb6f0;
+  }
+</style>

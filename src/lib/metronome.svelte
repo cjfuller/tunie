@@ -2,75 +2,75 @@
   import {_} from "svelte-i18n";
   import Container from "../lib/container.svelte"
   import {InputGroup, InputGroupText, Input, ButtonGroup, Button} from "sveltestrap";
-  import {calculateFreq} from "./sound-math.ts";
-  let baseFreqHz = 440;
+  let tempo = 60;
   let playing = false;
-  let octave = 4;
-  let pitch = "a";
-  let mod = "\u266e";
-  let sounds: OscillatorNode | null = null;
+  let interval: number | null = null;
   let uaSearch = globalThis?.navigator?.userAgent?.indexOf("AppleWebKit");
   let uaIsWebkit = uaSearch != null && uaSearch != -1;
 
+  function createClick(ctx: AudioContext) {
+    // Create an oscillator and a gain node
+    const oscillator = ctx.createOscillator();
+    oscillator.type = 'sine';
+    oscillator.frequency.value = 880;
+
+    const gainNode = ctx.createGain();
+    gainNode.gain.setValueAtTime(0, ctx.currentTime);
+    gainNode.gain.linearRampToValueAtTime(1, ctx.currentTime + 0.001);
+    gainNode.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.015);
+
+    const highPassFilter = ctx.createBiquadFilter();
+    highPassFilter.type = 'highpass';
+    highPassFilter.frequency.value = 800;
+
+    oscillator.connect(gainNode);
+    gainNode.connect(highPassFilter);
+    highPassFilter.connect(ctx.destination);
+
+    oscillator.start(ctx.currentTime);
+    oscillator.stop(ctx.currentTime + 0.02);
+  }
+
   const beginPlaying = () => {
     playing = true;
-    const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
-    const ctx = new AudioContext();
-    sounds = ctx.createOscillator();
-    const freq = calculateFreq(baseFreqHz, pitch, mod, octave);
-    sounds.frequency.value = freq;
-    sounds.connect(ctx.destination);
-    sounds.start();
+    const audioContext = new AudioContext();
+    createClick(audioContext);
+    interval = setInterval(() => createClick(audioContext), 60000 / tempo) as unknown as number;
   }
+
   const endPlaying = () => {
-    sounds?.stop();
-    sounds = null;
     playing = false;
+    if (interval != null) {
+      clearInterval(interval);
+    }
   }
 </script>
 
 <Container>
   <InputGroup class="manual-entry">
-    <InputGroupText class="manual-entry-component">A4</InputGroupText>
-    <Input class="manual-entry-component" type="number" min={400} max={460} step="1" bind:value={baseFreqHz} disabled={playing} />
-    <InputGroupText class="manual-entry-component">Hz</InputGroupText>
-  </InputGroup>
-  <div class="spacer"></div>
-  <InputGroup class="manual-entry">
-    <InputGroupText class="manual-entry-component">{$_("Octave")}</InputGroupText>
-    <Input class="manual-entry-component" type="number" min={0} max={10} step="1" bind:value={octave} disabled={playing} />
+    <InputGroupText class="manual-entry-component">{"\u2669 = "}</InputGroupText>
+    <Input class="manual-entry-component" type="number" min={10} max={300} step="1" bind:value={tempo} disabled={playing} />
   </InputGroup>
   <div class="spacer"></div>
   <InputGroup>
-    <InputGroupText class="multi-button">{$_("Pitch")}</InputGroupText>
     <ButtonGroup>
-      {#each ["a", "b", "c", "d", "e", "f", "g"] as buttonPitch}
+      {#each [45, 60, 80, 90, 100, 120, 140] as fixedTempo}
         <Button 
           color="light"
-          active={buttonPitch === pitch}
-          class={buttonPitch === pitch ? "multi-button active-multi-button" : "multi-button"}
-          disabled={playing}
-          on:click={() => {pitch=buttonPitch}}
+          active={fixedTempo === tempo}
+          class={fixedTempo === tempo ? "multi-button active-multi-button" : "multi-button"}
+          on:click={() => {
+            tempo=fixedTempo;
+            if (playing) {
+              endPlaying();
+              beginPlaying();
+            }}}
         >
-          {$_(`pitches.${buttonPitch}`)}
+          {fixedTempo}
         </Button>
       {/each}
     </ButtonGroup>
   </InputGroup>
-  <div class="spacer"></div>
-  <ButtonGroup>
-    {#each ["\u266e", "\u266d", "\u266f"] as modifier}
-      <Button
-        color="light"
-        active={modifier === mod}
-        class={modifier === mod ? "multi-button active-multi-button" : "multi-button"}
-        disabled={playing}
-        on:click={() => {mod = modifier}}
-      >
-        {modifier}
-      </Button>
-    {/each}
-  </ButtonGroup>
   <div class="spacer"></div>
   <Button class={playing ? "stop-button" : "play-button"} on:click={ () => playing ? endPlaying() : beginPlaying() }>
     {playing ? $_("Stop") : $_("Play")}
@@ -123,7 +123,7 @@
     color: #9cb6f0;
   }
   :global(.multi-button:focus) {
-    background-color: #31384c !important;
+    background-color: #31384c;
     color: #9cb6f0;
   }
   .spacer {

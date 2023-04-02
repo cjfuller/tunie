@@ -43,13 +43,14 @@
 
 <style>
   :global(.navbar) {
-    background-color: #eee;
-    color: #000 !important;
+    background-color: #9cb6f0;
+    color: #1a2238 !important;
   }
   button {
-    font-family: "Valkyrie A", serif;
+    font-family: Seravek, "Gill Sans Nova", Ubuntu, Calibri, "DejaVu Sans", source-sans-pro, sans-serif;
     font-size: 16px;
-    background-color: #eee;
+    color: #1a2238 !important;
+    background-color: #9cb6f0;
     border: none;
     padding: none;
   }
