@@ -1,8 +1,8 @@
 <script type="ts">
-  import {_} from "svelte-i18n";
-  import Container from "../lib/container.svelte"
-  import {InputGroup, InputGroupText, Input, ButtonGroup, Button} from "sveltestrap";
-  import {calculateFreq} from "./sound-math.ts";
+  import { _ } from "svelte-i18n";
+  import Container from "../lib/container.svelte";
+  import { InputGroup, InputGroupText, Input, ButtonGroup, Button } from "sveltestrap";
+  import { calculateFreq } from "./sound-math.ts";
   let baseFreqHz = 440;
   let playing = false;
   let octave = 4;
@@ -21,43 +21,61 @@
     sounds.frequency.value = freq;
     sounds.connect(ctx.destination);
     sounds.start();
-  }
+  };
   const endPlaying = () => {
     sounds?.stop();
     sounds = null;
     playing = false;
-  }
+  };
 </script>
 
 <Container>
   <InputGroup class="manual-entry">
     <InputGroupText class="manual-entry-component">A4</InputGroupText>
-    <Input class="manual-entry-component" type="number" min={400} max={460} step="1" bind:value={baseFreqHz} disabled={playing} />
+    <Input
+      class="manual-entry-component"
+      type="number"
+      min={400}
+      max={460}
+      step="1"
+      bind:value={baseFreqHz}
+      disabled={playing}
+    />
     <InputGroupText class="manual-entry-component">Hz</InputGroupText>
   </InputGroup>
-  <div class="spacer"></div>
+  <div class="spacer" />
   <InputGroup class="manual-entry">
     <InputGroupText class="manual-entry-component">{$_("Octave")}</InputGroupText>
-    <Input class="manual-entry-component" type="number" min={0} max={10} step="1" bind:value={octave} disabled={playing} />
+    <Input
+      class="manual-entry-component"
+      type="number"
+      min={0}
+      max={10}
+      step="1"
+      bind:value={octave}
+      disabled={playing}
+    />
   </InputGroup>
-  <div class="spacer"></div>
+  <div class="spacer" />
   <InputGroup>
     <InputGroupText class="multi-button">{$_("Pitch")}</InputGroupText>
     <ButtonGroup>
       {#each ["a", "b", "c", "d", "e", "f", "g"] as buttonPitch}
-        <Button 
+        <Button
           color="light"
           active={buttonPitch === pitch}
           class={buttonPitch === pitch ? "multi-button active-multi-button" : "multi-button"}
           disabled={playing}
-          on:click={() => {pitch=buttonPitch}}
+          on:click={() => {
+            pitch = buttonPitch;
+          }}
         >
           {$_(`pitches.${buttonPitch}`)}
         </Button>
       {/each}
     </ButtonGroup>
   </InputGroup>
-  <div class="spacer"></div>
+  <div class="spacer" />
   <ButtonGroup>
     {#each ["\u266e", "\u266d", "\u266f"] as modifier}
       <Button
@@ -65,17 +83,22 @@
         active={modifier === mod}
         class={modifier === mod ? "multi-button active-multi-button" : "multi-button"}
         disabled={playing}
-        on:click={() => {mod = modifier}}
+        on:click={() => {
+          mod = modifier;
+        }}
       >
         {modifier}
       </Button>
     {/each}
   </ButtonGroup>
-  <div class="spacer"></div>
-  <Button class={playing ? "stop-button" : "play-button"} on:click={ () => playing ? endPlaying() : beginPlaying() }>
+  <div class="spacer" />
+  <Button
+    class={playing ? "stop-button" : "play-button"}
+    on:click={() => (playing ? endPlaying() : beginPlaying())}
+  >
     {playing ? $_("Stop") : $_("Play")}
   </Button>
-  <div class="spacer"></div>
+  <div class="spacer" />
   {uaIsWebkit ? $_("iOSMessage") : ""}
 </Container>
 

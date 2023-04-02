@@ -1,10 +1,10 @@
 <script lang="ts">
-  import {_, locale} from "svelte-i18n";
-  import {Navbar, NavbarBrand, Nav, NavItem, NavLink, Collapse, NavbarToggler} from "sveltestrap";
+  import { _, locale } from "svelte-i18n";
+  import { Navbar, NavbarBrand, Nav, NavItem, NavLink, Collapse, NavbarToggler } from "sveltestrap";
   const setLocale = (newLocale: string) => {
     window.localStorage.setItem("locale", newLocale);
     locale.set(newLocale);
-  }
+  };
   let isOpen = false;
   function handleUpdate(event) {
     isOpen = event.detail.isOpen;
@@ -47,7 +47,8 @@
     color: #1a2238 !important;
   }
   button {
-    font-family: Seravek, "Gill Sans Nova", Ubuntu, Calibri, "DejaVu Sans", source-sans-pro, sans-serif;
+    font-family: Seravek, "Gill Sans Nova", Ubuntu, Calibri, "DejaVu Sans", source-sans-pro,
+      sans-serif;
     font-size: 16px;
     color: #1a2238 !important;
     background-color: #9cb6f0;

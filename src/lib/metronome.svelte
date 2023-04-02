@@ -1,7 +1,7 @@
 <script type="ts">
-  import {_} from "svelte-i18n";
-  import Container from "../lib/container.svelte"
-  import {InputGroup, InputGroupText, Input, ButtonGroup, Button} from "sveltestrap";
+  import { _ } from "svelte-i18n";
+  import Container from "../lib/container.svelte";
+  import { InputGroup, InputGroupText, Input, ButtonGroup, Button } from "sveltestrap";
   let tempo = 60;
   let playing = false;
   let interval: number | null = null;
@@ -11,7 +11,7 @@
   function createClick(ctx: AudioContext) {
     // Create an oscillator and a gain node
     const oscillator = ctx.createOscillator();
-    oscillator.type = 'sine';
+    oscillator.type = "sine";
     oscillator.frequency.value = 880;
 
     const gainNode = ctx.createGain();
@@ -20,7 +20,7 @@
     gainNode.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.015);
 
     const highPassFilter = ctx.createBiquadFilter();
-    highPassFilter.type = 'highpass';
+    highPassFilter.type = "highpass";
     highPassFilter.frequency.value = 800;
 
     oscillator.connect(gainNode);
@@ -36,46 +36,58 @@
     const audioContext = new AudioContext();
     createClick(audioContext);
     interval = setInterval(() => createClick(audioContext), 60000 / tempo) as unknown as number;
-  }
+  };
 
   const endPlaying = () => {
     playing = false;
     if (interval != null) {
       clearInterval(interval);
     }
-  }
+  };
 </script>
 
 <Container>
   <InputGroup class="manual-entry">
     <InputGroupText class="manual-entry-component">{"\u2669 = "}</InputGroupText>
-    <Input class="manual-entry-component" type="number" min={10} max={300} step="1" bind:value={tempo} disabled={playing} />
+    <Input
+      class="manual-entry-component"
+      type="number"
+      min={10}
+      max={300}
+      step="1"
+      bind:value={tempo}
+      disabled={playing}
+    />
   </InputGroup>
-  <div class="spacer"></div>
+  <div class="spacer" />
   <InputGroup>
     <ButtonGroup>
       {#each [45, 60, 80, 90, 100, 120, 140] as fixedTempo}
-        <Button 
+        <Button
           color="light"
           active={fixedTempo === tempo}
           class={fixedTempo === tempo ? "multi-button active-multi-button" : "multi-button"}
           on:click={() => {
-            tempo=fixedTempo;
+            tempo = fixedTempo;
             if (playing) {
               endPlaying();
               beginPlaying();
-            }}}
+            }
+          }}
         >
           {fixedTempo}
         </Button>
       {/each}
     </ButtonGroup>
   </InputGroup>
-  <div class="spacer"></div>
-  <Button class={playing ? "stop-button" : "play-button"} on:click={ () => playing ? endPlaying() : beginPlaying() }>
+  <div class="spacer" />
+  <Button
+    class={playing ? "stop-button" : "play-button"}
+    on:click={() => (playing ? endPlaying() : beginPlaying())}
+  >
     {playing ? $_("Stop") : $_("Play")}
   </Button>
-  <div class="spacer"></div>
+  <div class="spacer" />
   {uaIsWebkit ? $_("iOSMessage") : ""}
 </Container>
 

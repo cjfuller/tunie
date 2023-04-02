@@ -1,20 +1,20 @@
 {
-    "Tuner": "Tuner",
-    "Metronome": "Metronome",
-    "Tuning fork": "Tuning fork",
-    "Octave": "Octave",
-    "Pitch": "Pitch",
-    "Play": "Play",
-    "Stop": "Stop",
-    "Coming soon": "Coming soon",
-    "iOSMessage": "If you are using an iPhone, note that the ringer mute switch will also mute the application audio.",
-    "pitches": {
-        "a": "a",
-        "b": "b",
-        "c": "c",
-        "d": "d",
-        "e": "e",
-        "f": "f",
-        "g": "g"
-    }
+  "Tuner": "Tuner",
+  "Metronome": "Metronome",
+  "Tuning fork": "Tuning fork",
+  "Octave": "Octave",
+  "Pitch": "Pitch",
+  "Play": "Play",
+  "Stop": "Stop",
+  "Coming soon": "Coming soon",
+  "iOSMessage": "If you are using an iPhone, note that the ringer mute switch will also mute the application audio.",
+  "pitches": {
+    "a": "a",
+    "b": "b",
+    "c": "c",
+    "d": "d",
+    "e": "e",
+    "f": "f",
+    "g": "g"
+  }
 }
