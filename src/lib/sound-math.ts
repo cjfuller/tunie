@@ -41,3 +41,86 @@ export const calculateFreq = (
   octave: number,
 ): number =>
   baseFreq * Math.pow(2, (halfSteps(pitch, modifier, octave) - halfSteps("a", "\u266e", 4)) / 12.0);
+
+export const freqToHalfSteps = (freq: number, baseFreq: number): number =>
+  12 * Math.log2(freq / baseFreq);
+
+export const freqToPitchAndError = (
+  freq: number,
+  baseFreq: number,
+): [PitchClass, Modifier, number] => {
+  const halfStepsFrac = freqToHalfSteps(freq, baseFreq);
+  const halfSteps = Math.round(halfStepsFrac);
+  const err = halfStepsFrac - halfSteps;
+  let pitchClass: PitchClass = "a";
+  let modifier: Modifier = "\u266e";
+  switch (halfSteps % 12) {
+    case 0:
+      pitchClass = "a";
+      break;
+    case 1:
+      if (err < 0) {
+        pitchClass = "a";
+        modifier = "\u266f";
+      } else {
+        pitchClass = "b";
+        modifier = "\u266d";
+      }
+      break;
+    case 2:
+      pitchClass = "b";
+      break;
+    case 3:
+      pitchClass = "c";
+      break;
+    case 4:
+      if (err < 0) {
+        pitchClass = "c";
+        modifier = "\u266f";
+      } else {
+        pitchClass = "d";
+        modifier = "\u266d";
+      }
+      break;
+    case 5:
+      pitchClass = "d";
+      break;
+    case 6:
+      if (err < 0) {
+        pitchClass = "d";
+        modifier = "\u266f";
+      } else {
+        pitchClass = "e";
+        modifier = "\u266d";
+      }
+      break;
+    case 7:
+      pitchClass = "e";
+      break;
+    case 8:
+      pitchClass = "f";
+      break;
+    case 9:
+      if (err < 0) {
+        pitchClass = "f";
+        modifier = "\u266f";
+      } else {
+        pitchClass = "g";
+        modifier = "\u266d";
+      }
+      break;
+    case 10:
+      pitchClass = "g";
+      break;
+    case 11:
+      if (err < 0) {
+        pitchClass = "g";
+        modifier = "\u266f";
+      } else {
+        pitchClass = "a";
+        modifier = "\u266d";
+      }
+      break;
+  }
+  return [pitchClass, modifier, Math.round(err * 100)];
+};

@@ -2,7 +2,7 @@
   import "../lib/i18n.ts";
   import Nav from "../lib/nav.svelte";
   import { _ } from "svelte-i18n";
-  import Container from "../lib/container.svelte";
+  import Tuner from "../lib/tuner.svelte";
 </script>
 
 <svelte:head>
@@ -10,14 +10,4 @@
 </svelte:head>
 
 <Nav />
-<Container>
-  <div class="text">
-    {$_("Coming soon")}
-  </div>
-</Container>
-
-<style>
-  .text {
-    color: #9cb6f0;
-  }
-</style>
+<Tuner />
