@@ -49,8 +49,11 @@ export const freqToPitchAndError = (
   freq: number,
   baseFreq: number,
 ): [PitchClass, Modifier, number] => {
-  const halfStepsFrac = freqToHalfSteps(freq, baseFreq);
-  const halfSteps = Math.round(halfStepsFrac);
+  let halfStepsFrac = freqToHalfSteps(freq, baseFreq);
+  while (halfStepsFrac < 0) {
+    halfStepsFrac += 12;
+  }
+  let halfSteps = Math.round(halfStepsFrac);
   const err = halfStepsFrac - halfSteps;
   let pitchClass: PitchClass = "a";
   let modifier: Modifier = "\u266e";
