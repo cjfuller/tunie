@@ -1,7 +1,7 @@
-<script type="ts">
+<script lang="ts">
   import { _ } from "svelte-i18n";
   import Container from "../lib/container.svelte";
-  import { InputGroup, InputGroupText, Input, ButtonGroup, Button } from "sveltestrap";
+  import { InputGroup, InputGroupText, Input, ButtonGroup, Button } from "@sveltestrap/sveltestrap";
   import { calculateFreq } from "./sound-math.ts";
   let baseFreqHz = 440;
   let playing = false;

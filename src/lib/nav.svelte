@@ -1,12 +1,12 @@
 <script lang="ts">
   import { _, locale } from "svelte-i18n";
-  import { Navbar, NavbarBrand, Nav, NavItem, NavLink, Collapse, NavbarToggler } from "sveltestrap";
+  import { Navbar, NavbarBrand, Nav, NavItem, NavLink, Collapse, NavbarToggler } from "@sveltestrap/sveltestrap";
   const setLocale = (newLocale: string) => {
     window.localStorage.setItem("locale", newLocale);
     locale.set(newLocale);
   };
   let isOpen = false;
-  function handleUpdate(event) {
+  function handleUpdate(event: any) {
     isOpen = event.detail.isOpen;
   }
 </script>
