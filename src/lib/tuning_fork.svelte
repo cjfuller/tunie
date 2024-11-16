@@ -3,11 +3,12 @@
   import Container from "../lib/container.svelte";
   import { InputGroup, InputGroupText, Input, ButtonGroup, Button } from "@sveltestrap/sveltestrap";
   import { calculateFreq } from "./sound-math.ts";
-  let baseFreqHz = 440;
+  import type { PitchClass, Modifier } from "./sound-math.ts";
+  let baseFreqHz = 442;
   let playing = false;
   let octave = 4;
-  let pitch = "a";
-  let mod = "\u266e";
+  let pitch: PitchClass = "a";
+  let mod: Modifier = "\u266e";
   let sounds: OscillatorNode | null = null;
   let uaSearch = globalThis?.navigator?.userAgent?.indexOf("AppleWebKit");
   let uaIsWebkit = uaSearch != null && uaSearch != -1;
@@ -27,6 +28,8 @@
     sounds = null;
     playing = false;
   };
+  const allPitches: PitchClass[] = ["a", "b", "c", "d", "e", "f", "g"];
+  const allMods: Modifier[] = ["\u266e", "\u266d", "\u266f"];
 </script>
 
 <Container>
@@ -60,7 +63,7 @@
   <InputGroup>
     <InputGroupText class="multi-button">{$_("Pitch")}</InputGroupText>
     <ButtonGroup>
-      {#each ["a", "b", "c", "d", "e", "f", "g"] as buttonPitch}
+      {#each allPitches as buttonPitch}
         <Button
           color="light"
           active={buttonPitch === pitch}
@@ -77,7 +80,7 @@
   </InputGroup>
   <div class="spacer" />
   <ButtonGroup>
-    {#each ["\u266e", "\u266d", "\u266f"] as modifier}
+    {#each allMods as modifier}
       <Button
         color="light"
         active={modifier === mod}

@@ -1,17 +1,16 @@
 {
-    "name": "Tunie",
-    "short_name": "Tunie",
-    "description": "Tuner, metronome, and tuning fork.",
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#1a2238",
-    "theme_color": "#9cb6f0",
-    "icons": [
-      {
-        "src": "/favicon.png",
-        "sizes": "192x192",
-        "type": "image/png"
-      }
-    ]
-  }
-  
+  "name": "Tunie",
+  "short_name": "Tunie",
+  "description": "Tuner, metronome, and tuning fork.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a2238",
+  "theme_color": "#9cb6f0",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

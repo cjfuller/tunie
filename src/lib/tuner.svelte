@@ -4,7 +4,7 @@
   import { InputGroup, InputGroupText, Input, Button } from "@sveltestrap/sveltestrap";
     import { freqToPitchAndError } from "./sound-math";
 
-  let baseFreqHz = 440;
+  let baseFreqHz = 442;
   let listening = false;
   let audioContext: AudioContext | null = null;
   let frequency: number | null = null;
@@ -46,30 +46,46 @@
     analyser.getByteFrequencyData(dataArray);
 
     // Not great heuristic method for finding the dominant frequency.
+    // Find the N higest frequency peaks, then take the one at the 
+    const N = 30;
     // TODO(colin): improve after doing some more reading.
-    let maxes = [[-Infinity, -1], [-Infinity, -1], [-Infinity, -1]];
+    let maxes = [];
+    for (let i = 0; i < Math.min(30, bufferLength / 10); i++) {
+      maxes.push([-Infinity, -1]);
+    }
 
-    for (let i = 0; i < bufferLength; i++) {
+    const W = 3;
+    if (bufferLength <= W) {
+      throw new Error("Sample rate too low to perform calculation.")
+    }
+    // The first element of the array is freq = 0, and the highest frequency is
+    // sample rate / 2, which is usually at or above the limit of human hearing.
+    // We skip the first W elements and last W elements for convenience, since
+    // they are usually irrelevant anyway.
+    for (let i = W; i < bufferLength - W; i++) {
       if (dataArray[i] > maxes[0][0]) {
-        maxes.push([dataArray[i], i]);
-        maxes.sort(([val1,], [val2,]) => val1 - val2);
-        maxes = maxes.slice(1);
+        let isMax = true;
+        for (let w = 1; w <= W; w++) {
+          isMax = isMax && (dataArray[i] > dataArray[i - w]) && (dataArray[i] > dataArray[i + w]);
+        }
+        if (isMax) {
+          maxes.push([dataArray[i], i]);
+          maxes.sort(([val1,], [val2,]) => val1 - val2);
+          maxes = maxes.slice(1);
+        }
       }
     }
 
-    let total = 0;
-    let totalWeight = 0;
-
-    if (maxes.some(([val, idx]) => idx === -1)) {
+    let potentialFreqs = maxes.filter(([, idx]) => idx !== -1);
+    if (potentialFreqs.length === 0) {
       return null;
     }
-
-    for (let [val, idx] of maxes) {
-      total += val * indexToFreq(idx);
-      totalWeight += val;
-    }
-
-    return total / totalWeight;
+    const highestAmplitude = potentialFreqs[potentialFreqs.length - 1][0];
+    // Filter to those peaks only that are > 50% of maximal amplitude.
+    potentialFreqs = potentialFreqs.filter(([ampl,]) => ampl > highestAmplitude / 2);
+    // Find the lowest frequency of the remaining peaks, which is probably the fundamental.
+    potentialFreqs.sort(([,idx1], [,idx2]) => idx1 - idx2);
+    return indexToFreq(potentialFreqs[0][1]);
   };
 
   const beginListening = () => {

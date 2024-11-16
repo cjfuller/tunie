@@ -1,5 +1,5 @@
-type PitchClass = "a" | "b" | "c" | "d" | "e" | "f" | "g";
-type Modifier = "\u266e" | "\u266d" | "\u266f";
+export type PitchClass = "a" | "b" | "c" | "d" | "e" | "f" | "g";
+export type Modifier = "\u266e" | "\u266d" | "\u266f";
 
 export const pitchClassHalfSteps = (pitch: PitchClass): number => {
   switch (pitch) {
