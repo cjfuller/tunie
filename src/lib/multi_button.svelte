@@ -1,5 +1,5 @@
 <script lang="ts" generics="T">
-  interface Props<T> {
+  interface Props {
     label: string;
     options: T[];
     selectedOption: T;
