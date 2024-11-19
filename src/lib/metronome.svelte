@@ -1,7 +1,6 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
   import Container from "../lib/container.svelte";
-  import { InputGroup, InputGroupText, Input, ButtonGroup, Button } from "@sveltestrap/sveltestrap";
   import { onDestroy } from "svelte";
     import StartStopButton from "./start_stop_button.svelte";
     import MultiButton from "./multi_button.svelte";

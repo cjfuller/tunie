@@ -1,11 +1,9 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
   import Container from "../lib/container.svelte";
-  import { InputGroup, InputGroupText, Input, ButtonGroup, Button } from "@sveltestrap/sveltestrap";
   import { calculateFreq } from "./sound-math.ts";
   import type { PitchClass, Modifier } from "./sound-math.ts";
   import { onDestroy } from "svelte";
-  import NumericInput from "./numeric_input.svelte";
   import MultiButton from "./multi_button.svelte";
   import StartStopButton from "./start_stop_button.svelte";
   let baseFreqHz = 442;
@@ -19,6 +17,7 @@
 
   const beginPlaying = () => {
     playing = true;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
     const ctx = new AudioContext();
     sounds = ctx.createOscillator();

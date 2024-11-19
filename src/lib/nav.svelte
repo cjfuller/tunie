@@ -5,12 +5,6 @@
     window.localStorage.setItem("locale", newLocale);
     locale.set(newLocale);
   };
-  let isOpen = false;
-  // eslint-disable-next-lint no-explicit-any
-  function handleUpdate(event: any) {
-    isOpen = event.detail.isOpen;
-  }
-
   let { selectedItem }: { selectedItem: "tuner" | "metronome" | "tuning-fork" | "settings" } = $props();
 </script>
 

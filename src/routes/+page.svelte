@@ -1,6 +1,5 @@
 <script>
-  import Container from "$lib/container.svelte";
-import "../lib/i18n.ts";
+  import "../lib/i18n.ts";
   import TuningFork from "../lib/tuning_fork.svelte";
 </script>
 

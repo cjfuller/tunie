@@ -1,15 +1,11 @@
 <script lang="ts" generics="T">
-  let {
-    label,
-    options,
-    onChange,
-    selectedOption = $bindable(),
-  }: {
+  interface Props<T> {
     label: string;
     options: T[];
     selectedOption: T;
     onChange: (newValue: T) => void;
-  } = $props();
+  }
+  let { label, options, onChange, selectedOption = $bindable() }: Props = $props();
 </script>
 
 <div class="outer-container">

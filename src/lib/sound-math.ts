@@ -31,11 +31,7 @@ export const modifierHalfSteps = (modifier: Modifier): number => {
   }
 };
 
-export const halfSteps = (
-  pitch: PitchClass,
-  modifier: Modifier,
-  octave: number,
-): number =>
+export const halfSteps = (pitch: PitchClass, modifier: Modifier, octave: number): number =>
   12 * octave + pitchClassHalfSteps(pitch) + modifierHalfSteps(modifier);
 
 export const calculateFreq = (
@@ -44,11 +40,7 @@ export const calculateFreq = (
   modifier: Modifier,
   octave: number,
 ): number =>
-  baseFreq *
-  Math.pow(
-    2,
-    (halfSteps(pitch, modifier, octave) - halfSteps("a", "\u266e", 4)) / 12.0,
-  );
+  baseFreq * Math.pow(2, (halfSteps(pitch, modifier, octave) - halfSteps("a", "\u266e", 4)) / 12.0);
 
 export function freqToHalfSteps(freq: number, baseFreq: number): number {
   console.log(`f: ${freq}, bf: ${baseFreq}`);

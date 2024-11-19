@@ -1,10 +1,12 @@
 <script lang="ts">
   import Nav from "../lib/nav.svelte";
 
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   let {
     selectedItem,
     children,
   }: { selectedItem: "tuner" | "metronome" | "tuning-fork" | "settings"; children: any } = $props();
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 </script>
 
 <div class="page-container">
