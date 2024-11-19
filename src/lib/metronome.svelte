@@ -59,7 +59,7 @@
       disabled={playing}
     />
   </InputGroup>
-  <div class="spacer" />
+  <div class="spacer"></div>
   <InputGroup>
     <ButtonGroup>
       {#each [45, 60, 80, 90, 100, 120, 140] as fixedTempo}
@@ -80,14 +80,14 @@
       {/each}
     </ButtonGroup>
   </InputGroup>
-  <div class="spacer" />
+  <div class="spacer"></div>
   <Button
     class={playing ? "stop-button" : "play-button"}
     on:click={() => (playing ? endPlaying() : beginPlaying())}
   >
     {playing ? $_("Stop") : $_("Play")}
   </Button>
-  <div class="spacer" />
+  <div class="spacer"></div>
   {uaIsWebkit ? $_("iOSMessage") : ""}
 </Container>
 

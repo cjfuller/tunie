@@ -6,6 +6,7 @@
     locale.set(newLocale);
   };
   let isOpen = false;
+  // eslint-disable-next-lint no-explicit-any
   function handleUpdate(event: any) {
     isOpen = event.detail.isOpen;
   }

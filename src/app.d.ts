@@ -2,6 +2,7 @@
 
 // See https://kit.svelte.dev/docs/typescript
 // for information about these interfaces
+/* eslint-disable no-empty-object-type */
 declare namespace App {
   interface Locals {}
 
@@ -11,3 +12,4 @@ declare namespace App {
 
   interface Stuff {}
 }
+/* eslint-enable no-empty-object-type */

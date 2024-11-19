@@ -46,7 +46,7 @@
     />
     <InputGroupText class="manual-entry-component">Hz</InputGroupText>
   </InputGroup>
-  <div class="spacer" />
+  <div class="spacer"></div>
   <InputGroup class="manual-entry">
     <InputGroupText class="manual-entry-component">{$_("Octave")}</InputGroupText>
     <Input
@@ -59,7 +59,7 @@
       disabled={playing}
     />
   </InputGroup>
-  <div class="spacer" />
+  <div class="spacer"></div>
   <InputGroup>
     <InputGroupText class="multi-button">{$_("Pitch")}</InputGroupText>
     <ButtonGroup>
@@ -78,7 +78,7 @@
       {/each}
     </ButtonGroup>
   </InputGroup>
-  <div class="spacer" />
+  <div class="spacer"></div>
   <ButtonGroup>
     {#each allMods as modifier}
       <Button
@@ -94,14 +94,14 @@
       </Button>
     {/each}
   </ButtonGroup>
-  <div class="spacer" />
+  <div class="spacer"></div>
   <Button
     class={playing ? "stop-button" : "play-button"}
     on:click={() => (playing ? endPlaying() : beginPlaying())}
   >
     {playing ? $_("Stop") : $_("Play")}
   </Button>
-  <div class="spacer" />
+  <div class="spacer"></div>
   {uaIsWebkit ? $_("iOSMessage") : ""}
 </Container>
 

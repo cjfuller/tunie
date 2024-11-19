@@ -53,7 +53,7 @@ export const freqToPitchAndError = (
   while (halfStepsFrac < 0) {
     halfStepsFrac += 12;
   }
-  let halfSteps = Math.round(halfStepsFrac);
+  const halfSteps = Math.round(halfStepsFrac);
   const err = halfStepsFrac - halfSteps;
   let pitchClass: PitchClass = "a";
   let modifier: Modifier = "\u266e";

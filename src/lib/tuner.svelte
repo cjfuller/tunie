@@ -50,7 +50,7 @@
     const N = 30;
     // TODO(colin): improve after doing some more reading.
     let maxes = [];
-    for (let i = 0; i < Math.min(30, bufferLength / 10); i++) {
+    for (let i = 0; i < Math.min(N, bufferLength / 10); i++) {
       maxes.push([-Infinity, -1]);
     }
 
@@ -134,14 +134,14 @@
     />
     <InputGroupText class="manual-entry-component">Hz</InputGroupText>
   </InputGroup>
-  <div class="spacer" />
+  <div class="spacer"></div>
   <Button
     class={listening ? "stop-button" : "play-button"}
     on:click={() => (listening ? endListening() : beginListening())}
   >
     {listening ? $_("Stop") : $_("Listen")}
   </Button>
-  <div class="spacer" />
+  <div class="spacer"></div>
   <div class="frequency">
     {frequency ? `${Math.round(frequency)}Hz → ${pitchClass}${modifier} ${sign}${err}%` : ""}
   </div>
