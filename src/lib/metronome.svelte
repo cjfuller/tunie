@@ -5,11 +5,10 @@
     import StartStopButton from "./start_stop_button.svelte";
     import MultiButton from "./multi_button.svelte";
     import NumericInput from "./numeric_input.svelte";
+    import { isiOS } from "./detect-ios";
   let tempo = 60;
   let playing = false;
   let interval: number | null = null;
-  let uaSearch = globalThis?.navigator?.userAgent?.indexOf("AppleWebKit");
-  let uaIsWebkit = uaSearch != null && uaSearch != -1;
 
   function createClick(ctx: AudioContext) {
     // Create an oscillator and a gain node
@@ -83,7 +82,7 @@
     />
   </div>
   <div class="spacer"></div>
-  {uaIsWebkit ? $_("iOSMessage") : ""}
+  {isiOS() ? $_("iOSMessage") : ""}
 </Container>
 
 <style>

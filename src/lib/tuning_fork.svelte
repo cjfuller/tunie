@@ -6,6 +6,7 @@
   import { onDestroy } from "svelte";
   import MultiButton from "./multi_button.svelte";
   import StartStopButton from "./start_stop_button.svelte";
+    import { isiOS } from "./detect-ios.ts";
   let baseFreqHz = 442;
   let playing = false;
   let octave = 4;
@@ -102,7 +103,7 @@
       bind:selectedOption={octave}
     />
     <div class="spacer"></div>
-    {uaIsWebkit ? $_("iOSMessage") : ""}
+    {isiOS() ? $_("iOSMessage") : ""}
   </div>
 </Container>
 
