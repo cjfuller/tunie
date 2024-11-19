@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="100%" height="100%" viewBox="0 0 256 256" version="1.1" xml:space="preserve" style="clip-rule:evenodd;fill-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5" id="svg12"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:svg="http://www.w3.org/2000/svg">
+    <defs id="defs12" />
+    <g transform="matrix(1.3400323,0,0,1.3400323,-34.803881,-28.123816)" id="g12">
+        <path d="m 61.492505,198.5075 35,-163.999998 h 50.000005 l 35,163.999998" style="fill:none;stroke:#2c2c2c;stroke-width:11.1938;stroke-dasharray:none" id="path1" />
+        <path d="M 180,200 H 60" style="fill:none;stroke:#2c2c2c;stroke-width:11.1938;stroke-dasharray:none" id="path2" />
+        <path d="m 121.61501,150.69 -0.245,-93.557" style="fill:none;stroke:#2c2c2c;stroke-width:5.97001;stroke-dasharray:none" id="path3" />
+        <g transform="matrix(1.7767913,0,0,1.7767913,-92.354998,-17.557103)" id="g4">
+            <path d="m 110.356,57 4,10 h 12 l 4,-10 z" style="fill:#2c2c2c;stroke:#2c2c2c;stroke-width:1px" id="path4" />
+        </g>
+
+
+
+
+
+
+        <g transform="translate(-0.175132,-13)" id="g11">
+            <circle cx="121.66764" cy="166.56702" r="7.8359118" style="fill:#2c2c2c;stroke:#2c2c2c;stroke-width:2.23819px" id="circle10" />
+        </g>
+    </g>
+</svg>

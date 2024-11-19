@@ -7,7 +7,7 @@
   "Play": "Play",
   "Listen": "Listen",
   "Stop": "Stop",
-  "Coming soon": "Coming soon",
+  "Modifier": "Modifier",
   "iOSMessage": "If you are using an iPhone, note that the ringer mute switch will also mute the application audio.",
   "pitches": {
     "a": "a",
@@ -17,5 +17,9 @@
     "e": "e",
     "f": "f",
     "g": "g"
-  }
+  },
+  "Settings": "Settings",
+  "Made with love": "Tunie is made with love in Montréal by Colin Fuller and is",
+  "open source": "open source",
+  "Base pitch": "Base pitch"
 }

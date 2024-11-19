@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<svg width="100%" height="100%" viewBox="0 0 256 256" version="1.1" id="svg1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <defs id="defs1" />
+    <metadata id="metadata1">
+        <rdf:RDF>
+            <cc:Work rdf:about="">
+                <dc:format>image/svg+xml</dc:format>
+                <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+            </cc:Work>
+        </rdf:RDF>
+    </metadata>
+    <path style="fill:none;stroke:#2c2c2c;stroke-width:15;stroke-linecap:butt;stroke-dasharray:none;stroke-opacity:1" d="m 103.00017,24 c 0,0 -3.4e-4,112.44416 -3.4e-4,118 0,15.65736 11.61734,23.02823 24.74763,22.87944 14.14306,-0.16027 25,-7.47461 25.25254,-22.87944 0,-5.55584 0,-118 0,-118" id="path1" />
+    <path style="fill:none;stroke:#2c2c2c;stroke-width:15;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1" d="m 128,166 v 61" id="path2" />
+    <circle style="fill:#2c2c2c;fill-opacity:1;stroke:none;stroke-width:32;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1" id="path3" cx="128" cy="231" r="16" />
+</svg>

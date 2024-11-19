@@ -1,3 +1,11 @@
 a {
   color: inherit !important;
 }
+
+body {
+  font-family: Seravek, "Gill Sans Nova", Ubuntu, Calibri, "DejaVu Sans", source-sans-pro,
+    sans-serif;
+  font-size: 16px;
+  color: #1a2238;
+  background-color: #9cb6f0;
+}

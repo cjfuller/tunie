@@ -7,7 +7,8 @@
   "Play": "Jouer",
   "Listen": "Écouter",
   "Stop": "Arrêter",
-  "Coming soon": "À venir",
+  "Settings": "Paramètres",
+  "Modifier": "Modification",
   "iOSMessage": "Si vouz utilizez un iPhone, veuillez prendre note que l'interrupteur pour couper la sonnerie coupe aussi le son de l'application.",
   "pitches": {
     "a": "la",
@@ -17,5 +18,8 @@
     "e": "mi",
     "f": "fa",
     "g": "sol"
-  }
+  },
+  "Made with love": "Tunie est fait avec amour à Montréal par Colin Fuller, et il est",
+  "open source": "un logiciel libre",
+  "Base pitch": "Diapason de référence"
 }

@@ -2,6 +2,10 @@
   import { _ } from "svelte-i18n";
   import Container from "../lib/container.svelte";
   import { InputGroup, InputGroupText, Input, ButtonGroup, Button } from "@sveltestrap/sveltestrap";
+  import { onDestroy } from "svelte";
+    import StartStopButton from "./start_stop_button.svelte";
+    import MultiButton from "./multi_button.svelte";
+    import NumericInput from "./numeric_input.svelte";
   let tempo = 60;
   let playing = false;
   let interval: number | null = null;
@@ -44,49 +48,41 @@
       clearInterval(interval);
     }
   };
+
+  onDestroy(endPlaying);
 </script>
 
-<Container>
-  <InputGroup class="manual-entry">
-    <InputGroupText class="manual-entry-component">{"\u2669 = "}</InputGroupText>
-    <Input
-      class="manual-entry-component"
-      type="number"
+<Container selectedItem="metronome">
+  <div class="main-container">
+    <StartStopButton
+      activeText={$_("Stop")}
+      inactiveText={$_("Play")}
+      onActivate={beginPlaying}
+      onDeactivate={endPlaying}
+      bind:active={playing}
+    />
+    <div class="spacer"></div>
+    <MultiButton
+      label={"\u2669 = "}
+      options={[45, 60, 80, 90, 100, 120, 140]}
+      onChange={(newTempo) => {
+        tempo = newTempo;
+        if (playing) {
+          endPlaying();
+          beginPlaying();
+        }
+      }}
+      bind:selectedOption={tempo}
+    />
+    <div class="spacer"></div>
+    <NumericInput
+      label={"\u2669 = "}
       min={10}
       max={300}
-      step="1"
       bind:value={tempo}
       disabled={playing}
     />
-  </InputGroup>
-  <div class="spacer"></div>
-  <InputGroup>
-    <ButtonGroup>
-      {#each [45, 60, 80, 90, 100, 120, 140] as fixedTempo}
-        <Button
-          color="light"
-          active={fixedTempo === tempo}
-          class={fixedTempo === tempo ? "multi-button active-multi-button" : "multi-button"}
-          on:click={() => {
-            tempo = fixedTempo;
-            if (playing) {
-              endPlaying();
-              beginPlaying();
-            }
-          }}
-        >
-          {fixedTempo}
-        </Button>
-      {/each}
-    </ButtonGroup>
-  </InputGroup>
-  <div class="spacer"></div>
-  <Button
-    class={playing ? "stop-button" : "play-button"}
-    on:click={() => (playing ? endPlaying() : beginPlaying())}
-  >
-    {playing ? $_("Stop") : $_("Play")}
-  </Button>
+  </div>
   <div class="spacer"></div>
   {uaIsWebkit ? $_("iOSMessage") : ""}
 </Container>

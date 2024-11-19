@@ -1,11 +1,11 @@
 <script>
   import "../../lib/i18n.ts";
   import { _ } from "svelte-i18n";
-  import Tuner from "../../lib/tuner.svelte";
+  import Settings from "../../lib/settings.svelte";
 </script>
 
 <svelte:head>
-  <title>Tunie - {$_("Tuner")}</title>
+  <title>Tunie - {$_("Settings")}</title>
 </svelte:head>
 
-<Tuner />
+<Settings />

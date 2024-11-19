@@ -4,6 +4,10 @@
   import { InputGroup, InputGroupText, Input, ButtonGroup, Button } from "@sveltestrap/sveltestrap";
   import { calculateFreq } from "./sound-math.ts";
   import type { PitchClass, Modifier } from "./sound-math.ts";
+  import { onDestroy } from "svelte";
+  import NumericInput from "./numeric_input.svelte";
+  import MultiButton from "./multi_button.svelte";
+  import StartStopButton from "./start_stop_button.svelte";
   let baseFreqHz = 442;
   let playing = false;
   let octave = 4;
@@ -28,84 +32,88 @@
     sounds = null;
     playing = false;
   };
+  function changeItem<T>(newItem: T, getter: () => T, setter: (newItem: T) => void) {
+    let restart = false;
+    if (newItem !== getter() && playing) {
+      restart = true;
+      endPlaying();
+    }
+    setter(newItem);
+    if (restart) {
+      beginPlaying();
+    }
+  }
+  const changePitch = (newItem: PitchClass) =>
+    changeItem(
+      newItem,
+      () => pitch,
+      (newPitch) => {
+        pitch = newPitch;
+      },
+    );
+  const changeMod = (newItem: Modifier) =>
+    changeItem(
+      newItem,
+      () => mod,
+      (newMod) => {
+        mod = newMod;
+      },
+    );
+  const changeOctave = (newItem: number) =>
+    changeItem(
+      newItem,
+      () => octave,
+      (newOctave) => {
+        octave = newOctave;
+      },
+    );
   const allPitches: PitchClass[] = ["a", "b", "c", "d", "e", "f", "g"];
   const allMods: Modifier[] = ["\u266e", "\u266d", "\u266f"];
+  onDestroy(endPlaying);
 </script>
 
-<Container>
-  <InputGroup class="manual-entry">
-    <InputGroupText class="manual-entry-component">A4</InputGroupText>
-    <Input
-      class="manual-entry-component"
-      type="number"
-      min={400}
-      max={460}
-      step="1"
-      bind:value={baseFreqHz}
-      disabled={playing}
+<Container selectedItem="tuning-fork">
+  <div class="main-container">
+    <StartStopButton
+      activeText={$_("Stop")}
+      inactiveText={$_("Play")}
+      onActivate={beginPlaying}
+      onDeactivate={endPlaying}
+      bind:active={playing}
     />
-    <InputGroupText class="manual-entry-component">Hz</InputGroupText>
-  </InputGroup>
-  <div class="spacer"></div>
-  <InputGroup class="manual-entry">
-    <InputGroupText class="manual-entry-component">{$_("Octave")}</InputGroupText>
-    <Input
-      class="manual-entry-component"
-      type="number"
-      min={0}
-      max={10}
-      step="1"
-      bind:value={octave}
-      disabled={playing}
+    <div class="spacer"></div>
+    <MultiButton
+      label={$_("Pitch")}
+      options={allPitches}
+      onChange={changePitch}
+      bind:selectedOption={pitch}
     />
-  </InputGroup>
-  <div class="spacer"></div>
-  <InputGroup>
-    <InputGroupText class="multi-button">{$_("Pitch")}</InputGroupText>
-    <ButtonGroup>
-      {#each allPitches as buttonPitch}
-        <Button
-          color="light"
-          active={buttonPitch === pitch}
-          class={buttonPitch === pitch ? "multi-button active-multi-button" : "multi-button"}
-          disabled={playing}
-          on:click={() => {
-            pitch = buttonPitch;
-          }}
-        >
-          {$_(`pitches.${buttonPitch}`)}
-        </Button>
-      {/each}
-    </ButtonGroup>
-  </InputGroup>
-  <div class="spacer"></div>
-  <ButtonGroup>
-    {#each allMods as modifier}
-      <Button
-        color="light"
-        active={modifier === mod}
-        class={modifier === mod ? "multi-button active-multi-button" : "multi-button"}
-        disabled={playing}
-        on:click={() => {
-          mod = modifier;
-        }}
-      >
-        {modifier}
-      </Button>
-    {/each}
-  </ButtonGroup>
-  <div class="spacer"></div>
-  <Button
-    class={playing ? "stop-button" : "play-button"}
-    on:click={() => (playing ? endPlaying() : beginPlaying())}
-  >
-    {playing ? $_("Stop") : $_("Play")}
-  </Button>
-  <div class="spacer"></div>
-  {uaIsWebkit ? $_("iOSMessage") : ""}
+    <div class="spacer"></div>
+    <MultiButton
+      label={$_("Modifier")}
+      options={allMods}
+      onChange={changeMod}
+      bind:selectedOption={mod}
+    />
+    <div class="spacer"></div>
+    <MultiButton
+      label={$_("Octave")}
+      options={[2, 3, 4, 5, 6]}
+      onChange={changeOctave}
+      bind:selectedOption={octave}
+    />
+    <div class="spacer"></div>
+    {uaIsWebkit ? $_("iOSMessage") : ""}
+  </div>
 </Container>
 
 <style>
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
   :global(.manual-entry) {
     max-width: 317px;
   }

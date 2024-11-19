@@ -7,7 +7,7 @@ https://tunie.ca
 # License
 
 Tunie, a tuner and metronome webapp
-Copyright (C) 2022 Colin J. Fuller
+Copyright (C) 2024 Colin J. Fuller
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as
@@ -24,7 +24,5 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 ---
 
-This repository contains a vendored unmodified minified copy of bootstrap 5.1.3
-css, which is Copyright by Twitter, Inc. and the Bootstrap authors, used under
-the MIT license. Code and full license text can be found at:
-https://github.com/twbs/bootstrap/blob/v5.1.3/LICENSE
+This repository contains original icons licensed under CC-BY-SA 4.0.
+See the file `ICON_LICENSE` or https://creativecommons.org/licenses/by-sa/4.0/.

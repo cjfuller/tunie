@@ -1,6 +1,6 @@
 <script>
-  import "../lib/i18n.ts";
-  import Nav from "../lib/nav.svelte";
+  import Container from "$lib/container.svelte";
+import "../lib/i18n.ts";
   import TuningFork from "../lib/tuning_fork.svelte";
 </script>
 
@@ -8,5 +8,7 @@
   <title>Tunie</title>
 </svelte:head>
 
-<Nav />
 <TuningFork />
+
+<style>
+</style>
