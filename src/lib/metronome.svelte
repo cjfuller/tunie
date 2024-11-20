@@ -18,7 +18,7 @@
 
     const gainNode = ctx.createGain();
     gainNode.gain.setValueAtTime(0, ctx.currentTime);
-    gainNode.gain.linearRampToValueAtTime(1, ctx.currentTime + 0.001);
+    gainNode.gain.linearRampToValueAtTime(20, ctx.currentTime + 0.001);
     gainNode.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.015);
 
     const highPassFilter = ctx.createBiquadFilter();
