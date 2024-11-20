@@ -37,6 +37,7 @@
   <div class="spacer"></div>
   <div class="pre-lang-spacer"></div>
   <div class="spacer"></div>
+  <div class="spacer"></div>
   <div class="locale" class:selected-locale={$locale === "en"}>
     <div onclick={() => setLocale("en")} onkeyup={(evt) => (evt.key === " ") ? setLocale("en") : null} role="button" tabindex="0">
       EN
@@ -48,6 +49,7 @@
       FR
     </div>
   </div>
+  <div class="spacer"></div>
   <div class="spacer"></div>
 </div>
 
