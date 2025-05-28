@@ -6,7 +6,9 @@ const getInitialLocale = (): string | null =>
   globalThis.localStorage.getItem("locale") ?? getLocaleFromNavigator();
 
 addMessages("en", en);
+addMessages("en", en.pitches);
 addMessages("fr", fr);
+addMessages("fr", fr.pitches);
 
 if (globalThis.localStorage) {
   init({

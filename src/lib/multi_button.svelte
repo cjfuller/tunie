@@ -5,6 +5,7 @@
     selectedOption: T;
     onChange: (newValue: T) => void;
   }
+  import { _ } from "svelte-i18n";
   let { label, options, onChange, selectedOption = $bindable() }: Props = $props();
 </script>
 
@@ -19,7 +20,7 @@
             class:active-button={selectedOption === option}
             class:inactive-button={selectedOption !== option}
             onclick={() => onChange(option)}
-            >{option}
+            >{(typeof option === "string") ? $_(option) : option}
           </button>
         {/each}
       </div>
