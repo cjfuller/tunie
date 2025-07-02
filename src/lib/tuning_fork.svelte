@@ -7,11 +7,12 @@
   import MultiButton from "./multi_button.svelte";
   import StartStopButton from "./start_stop_button.svelte";
     import { isiOS } from "./detect-ios.ts";
-  let baseFreqHz = 442;
-  let playing = false;
-  let octave = 4;
-  let pitch: PitchClass = "a";
-  let mod: Modifier = "\u266e";
+    import { getBasePitchHz } from "./pitch-settings.ts";
+  let playing = $state(false);
+  let octave = $state(4);
+  let pitch: PitchClass = $state("a");
+  let mod: Modifier = $state("\u266e");
+  let baseFreqHz = $state(getBasePitchHz());
   let sounds: OscillatorNode | null = null;
   let uaSearch = globalThis?.navigator?.userAgent?.indexOf("AppleWebKit");
   let uaIsWebkit = uaSearch != null && uaSearch != -1;
