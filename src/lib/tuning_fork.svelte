@@ -3,7 +3,7 @@
   import Container from "../lib/container.svelte";
   import { calculateFreq } from "./sound-math.ts";
   import type { PitchClass, Modifier } from "./sound-math.ts";
-  import { onDestroy } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import MultiButton from "./multi_button.svelte";
   import StartStopButton from "./start_stop_button.svelte";
     import { isiOS } from "./detect-ios.ts";
@@ -71,6 +71,10 @@
   const allPitches: PitchClass[] = ["a", "b", "c", "d", "e", "f", "g"];
   const allMods: Modifier[] = ["\u266e", "\u266d", "\u266f"];
   onDestroy(endPlaying);
+  // Is this necessary for prerendering or no?
+  onMount(() => {
+    baseFreqHz = getBasePitchHz();
+  });
 </script>
 
 <Container selectedItem="tuning-fork">
